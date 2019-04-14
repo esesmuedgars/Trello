@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 
-        // TODO: parse `url` to get user token.
+        APIService.shared.token = String(url.absoluteString.split(separator: "=")[1])
         
         return true
     }

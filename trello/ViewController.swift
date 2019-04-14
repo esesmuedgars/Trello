@@ -11,40 +11,41 @@ import SafariServices
 
 class ViewController: UIViewController {
 
-    /// Defines how the token is returned to client.
-    /// Should not be edited.
-    let callbackMethod = "fragment"
+    private weak var safariController: SFSafariViewController?
 
-    /// Redirect URL where the user will be redirected after authorization.
-    /// Should not be edited.
-    let returnUrl = "trello:"
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    /// Permission scope.
-    ///
-    /// - `read`
-    /// reading of boards, organizations, etc. on behalf of the user.
-    ///
-    /// - `write`
-    /// writing of boards, organizations, etc. on behalf of the user.
-    ///
-    /// - `account`
-    /// writing of member info, and marking notifications read.
-    let scope = "<#String#>"
+        bind()
+    }
 
-    /// Indicator of when the token should expire.
-    let expiration = "<#String#>"
+    private func bind() {
+        APIService.shared.didAuthorize = { [weak self] in
+            self?.shouldAuthorize = false
 
-    /// Name of the application.
-    /// Displayed during the authorization process.
-    let name = "<#String#>"
+            self?.safariController?.dismiss(animated: true, completion: {
+                self?.safariController = nil
+            })
+        }
+    }
 
-    /// API key.
-    /// Used to generate the user's token.
-    let key = "<#String#>"
+    private var shouldAuthorize = true
 
-    /// Response type of token.
-    /// Should not be edited.
-    let responseType = "token"
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
+        guard shouldAuthorize else { return }
+
+        APIService.shared.authorize { [weak self] (url) in
+            guard let url = url else { return }
+
+            DispatchQueue.main.async {
+                let controller = SFSafariViewController(url: url)
+                self?.safariController = controller
+
+                self?.present(controller, animated: true)
+            }
+        }
+    }
 }
 

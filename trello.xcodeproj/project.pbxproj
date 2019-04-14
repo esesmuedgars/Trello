@@ -12,6 +12,8 @@
 		7209869B22626D5900327BF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7209869922626D5900327BF1 /* Main.storyboard */; };
 		7209869D22626D5B00327BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7209869C22626D5B00327BF1 /* Assets.xcassets */; };
 		720986A022626D5B00327BF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */; };
+		724CD43F22639DFD007CD290 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD43E22639DFD007CD290 /* APIService.swift */; };
+		724CD44122639F61007CD290 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD44022639F61007CD290 /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		7209869C22626D5B00327BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7209869F22626D5B00327BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		720986A122626D5B00327BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		724CD43E22639DFD007CD290 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		724CD44022639F61007CD290 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				7209869C22626D5B00327BF1 /* Assets.xcassets */,
 				7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */,
 				720986A122626D5B00327BF1 /* Info.plist */,
+				724CD43E22639DFD007CD290 /* APIService.swift */,
+				724CD44022639F61007CD290 /* Endpoint.swift */,
 			);
 			path = trello;
 			sourceTree = "<group>";
@@ -136,7 +142,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7209869822626D5900327BF1 /* ViewController.swift in Sources */,
+				724CD43F22639DFD007CD290 /* APIService.swift in Sources */,
 				7209869622626D5900327BF1 /* AppDelegate.swift in Sources */,
+				724CD44122639F61007CD290 /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
