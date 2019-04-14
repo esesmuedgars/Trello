@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 
     /// Redirect URL where the user will be redirected after authorization.
     /// Should not be edited.
-    let returnUrl = "mytrelloapp:"
+    let returnUrl = "trello:"
 
     /// Permission scope.
     ///

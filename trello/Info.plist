@@ -25,7 +25,7 @@
 			<string>esesmuedgars.trello</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>mytrelloapp</string>
+				<string>trello</string>
 			</array>
 		</dict>
 	</array>
