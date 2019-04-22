@@ -8,6 +8,13 @@
 
 import Foundation
 
+public enum NetworkingError: Error {
+    case invalidURL
+    case responseNoData
+    case unableToParseResponse
+    case unexpectedStatusCode
+}
+
 public struct APIService {
 
     public static var shared = APIService()
@@ -49,6 +56,9 @@ public struct APIService {
     /// Should not be edited.
     private let responseType = "token"
 
+    /// Trello interprets `me` in the place of a `memberID` as a reference to the user who is making the request based on the API token.
+    private let memberId = "me"
+
     public var didAuthorize: (() -> Void)?
 
     var token: String? {
@@ -71,5 +81,35 @@ public struct APIService {
         let url = Endpoint.authorize.url(with: queryItems)
 
         completion(url)
+    }
+
+    public func fetchBoards(completionHandler completion: @escaping (Result<Boards, NetworkingError>) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "key", value: key),
+            URLQueryItem(name: "token", value: token)
+        ]
+
+        guard let url = Endpoint.boards(forMember: memberId).url(with: queryItems) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.responseNoData))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+
+            do {
+                completion(.success(try JSONDecoder().decode(Boards.self, from: data)))
+            } catch {
+                completion(.failure(.unableToParseResponse))
+            }
+        }.resume()
     }
 }

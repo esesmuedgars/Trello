@@ -8,8 +8,20 @@
 
 import Foundation
 
-public enum Endpoint: String {
-    case authorize = "authorize"
+public enum Endpoint {
+    case authorize
+    case boards(forMember: String)
+
+    private var rawValue: String {
+        get {
+            switch self {
+            case .authorize:
+                return "authorize"
+            case .boards(let memberId):
+                return "members/\(memberId)/boards"
+            }
+        }
+    }
 
     private static var base = "https://trello.com/1"
 

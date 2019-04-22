@@ -14,6 +14,9 @@
 		720986A022626D5B00327BF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */; };
 		724CD43F22639DFD007CD290 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD43E22639DFD007CD290 /* APIService.swift */; };
 		724CD44122639F61007CD290 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD44022639F61007CD290 /* Endpoint.swift */; };
+		728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F2226E5C760097F6A1 /* Extensions.swift */; };
+		728FA3F5226E5D870097F6A1 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F4226E5D870097F6A1 /* BoardCell.swift */; };
+		72FB5786226E5646009BE51D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FB5785226E5646009BE51D /* Board.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		720986A122626D5B00327BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		724CD43E22639DFD007CD290 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		724CD44022639F61007CD290 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		728FA3F2226E5C760097F6A1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		728FA3F4226E5D870097F6A1 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
+		72FB5785226E5646009BE51D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +72,19 @@
 				720986A122626D5B00327BF1 /* Info.plist */,
 				724CD43E22639DFD007CD290 /* APIService.swift */,
 				724CD44022639F61007CD290 /* Endpoint.swift */,
+				728FA3F2226E5C760097F6A1 /* Extensions.swift */,
+				728FA3F4226E5D870097F6A1 /* BoardCell.swift */,
+				72FB5787226E565A009BE51D /* Models */,
 			);
 			path = trello;
+			sourceTree = "<group>";
+		};
+		72FB5787226E565A009BE51D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72FB5785226E5646009BE51D /* Board.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,8 +159,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7209869822626D5900327BF1 /* ViewController.swift in Sources */,
+				728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */,
 				724CD43F22639DFD007CD290 /* APIService.swift in Sources */,
+				72FB5786226E5646009BE51D /* Board.swift in Sources */,
 				7209869622626D5900327BF1 /* AppDelegate.swift in Sources */,
+				728FA3F5226E5D870097F6A1 /* BoardCell.swift in Sources */,
 				724CD44122639F61007CD290 /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

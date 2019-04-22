@@ -11,7 +11,15 @@ import SafariServices
 
 class ViewController: UIViewController {
 
+    @IBOutlet private var tableView: UITableView!
+
     private weak var safariController: SFSafariViewController?
+
+    private var boards = Boards() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +31,11 @@ class ViewController: UIViewController {
         APIService.shared.didAuthorize = { [weak self] in
             self?.shouldAuthorize = false
 
-            self?.safariController?.dismiss(animated: true, completion: {
-                self?.safariController = nil
-            })
+            DispatchQueue.main.async {
+                self?.safariController?.dismiss(animated: true, completion: {
+                    self?.safariController = nil
+                })
+            }
         }
     }
 
@@ -34,7 +44,20 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard shouldAuthorize else { return }
+        guard shouldAuthorize else {
+            APIService.shared.fetchBoards { [weak self] result in
+                switch result {
+                case .success(let boards):
+                    DispatchQueue.main.async {
+                        self?.boards = boards
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+
+            return
+        }
 
         APIService.shared.authorize { [weak self] (url) in
             guard let url = url else { return }
@@ -49,3 +72,29 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return boards.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withType: BoardCell.self, for: indexPath) {
+            let title = boards[indexPath.row].name
+            cell.configure(with: title)
+
+            return cell
+        }
+
+        return UITableViewCell()
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO:
+        // Make request to get board data by board identifier
+        // Present `BoardViewController`
+
+        print(boards[indexPath.row].id)
+    }
+}
