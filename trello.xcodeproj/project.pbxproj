@@ -8,29 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		7209869622626D5900327BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209869522626D5900327BF1 /* AppDelegate.swift */; };
-		7209869822626D5900327BF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209869722626D5900327BF1 /* ViewController.swift */; };
+		7209869822626D5900327BF1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209869722626D5900327BF1 /* MainViewController.swift */; };
 		7209869B22626D5900327BF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7209869922626D5900327BF1 /* Main.storyboard */; };
 		7209869D22626D5B00327BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7209869C22626D5B00327BF1 /* Assets.xcassets */; };
 		720986A022626D5B00327BF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */; };
 		724CD43F22639DFD007CD290 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD43E22639DFD007CD290 /* APIService.swift */; };
 		724CD44122639F61007CD290 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724CD44022639F61007CD290 /* Endpoint.swift */; };
+		7267D72E226F9F1C0029067C /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D72D226F9F1C0029067C /* BoardViewController.swift */; };
+		7267D730226FB03B0029067C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D72F226FB03B0029067C /* List.swift */; };
+		7267D732226FB0920029067C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D731226FB0920029067C /* Card.swift */; };
+		7267D734226FB1990029067C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D733226FB1990029067C /* Label.swift */; };
+		7267D736226FB5CD0029067C /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D735226FB5CD0029067C /* CardCollectionViewCell.swift */; };
+		7267D73A226FB9280029067C /* ListCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D739226FB9280029067C /* ListCollectionHeaderView.swift */; };
 		728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F2226E5C760097F6A1 /* Extensions.swift */; };
-		728FA3F5226E5D870097F6A1 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F4226E5D870097F6A1 /* BoardCell.swift */; };
+		728FA3F5226E5D870097F6A1 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */; };
 		72FB5786226E5646009BE51D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FB5785226E5646009BE51D /* Board.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7209869222626D5900327BF1 /* trello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7209869522626D5900327BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7209869722626D5900327BF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7209869722626D5900327BF1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7209869A22626D5900327BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7209869C22626D5B00327BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7209869F22626D5B00327BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		720986A122626D5B00327BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		724CD43E22639DFD007CD290 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		724CD44022639F61007CD290 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		7267D72D226F9F1C0029067C /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		7267D72F226FB03B0029067C /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		7267D731226FB0920029067C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		7267D733226FB1990029067C /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		7267D735226FB5CD0029067C /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		7267D739226FB9280029067C /* ListCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionHeaderView.swift; sourceTree = "<group>"; };
 		728FA3F2226E5C760097F6A1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		728FA3F4226E5D870097F6A1 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
+		728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		72FB5785226E5646009BE51D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,25 +76,47 @@
 		7209869422626D5900327BF1 /* trello */ = {
 			isa = PBXGroup;
 			children = (
-				7209869522626D5900327BF1 /* AppDelegate.swift */,
-				7209869722626D5900327BF1 /* ViewController.swift */,
-				7209869922626D5900327BF1 /* Main.storyboard */,
-				7209869C22626D5B00327BF1 /* Assets.xcassets */,
-				7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */,
-				720986A122626D5B00327BF1 /* Info.plist */,
-				724CD43E22639DFD007CD290 /* APIService.swift */,
-				724CD44022639F61007CD290 /* Endpoint.swift */,
-				728FA3F2226E5C760097F6A1 /* Extensions.swift */,
-				728FA3F4226E5D870097F6A1 /* BoardCell.swift */,
-				72FB5787226E565A009BE51D /* Models */,
+				7209869722626D5900327BF1 /* MainViewController.swift */,
+				728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */,
+				7267D72D226F9F1C0029067C /* BoardViewController.swift */,
+				7267D739226FB9280029067C /* ListCollectionHeaderView.swift */,
+				7267D735226FB5CD0029067C /* CardCollectionViewCell.swift */,
+				7267D738226FB6340029067C /* Supporting */,
+				7267D737226FB6230029067C /* Networking */,
 			);
 			path = trello;
+			sourceTree = "<group>";
+		};
+		7267D737226FB6230029067C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				724CD44022639F61007CD290 /* Endpoint.swift */,
+				724CD43E22639DFD007CD290 /* APIService.swift */,
+				72FB5787226E565A009BE51D /* Models */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		7267D738226FB6340029067C /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				7209869922626D5900327BF1 /* Main.storyboard */,
+				7209869E22626D5B00327BF1 /* LaunchScreen.storyboard */,
+				728FA3F2226E5C760097F6A1 /* Extensions.swift */,
+				7209869522626D5900327BF1 /* AppDelegate.swift */,
+				7209869C22626D5B00327BF1 /* Assets.xcassets */,
+				720986A122626D5B00327BF1 /* Info.plist */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		72FB5787226E565A009BE51D /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				72FB5785226E5646009BE51D /* Board.swift */,
+				7267D72F226FB03B0029067C /* List.swift */,
+				7267D731226FB0920029067C /* Card.swift */,
+				7267D733226FB1990029067C /* Label.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,13 +192,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7209869822626D5900327BF1 /* ViewController.swift in Sources */,
+				7209869822626D5900327BF1 /* MainViewController.swift in Sources */,
 				728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */,
 				724CD43F22639DFD007CD290 /* APIService.swift in Sources */,
+				7267D72E226F9F1C0029067C /* BoardViewController.swift in Sources */,
+				7267D736226FB5CD0029067C /* CardCollectionViewCell.swift in Sources */,
+				7267D73A226FB9280029067C /* ListCollectionHeaderView.swift in Sources */,
+				7267D734226FB1990029067C /* Label.swift in Sources */,
 				72FB5786226E5646009BE51D /* Board.swift in Sources */,
 				7209869622626D5900327BF1 /* AppDelegate.swift in Sources */,
-				728FA3F5226E5D870097F6A1 /* BoardCell.swift in Sources */,
+				728FA3F5226E5D870097F6A1 /* BoardTableViewCell.swift in Sources */,
+				7267D732226FB0920029067C /* Card.swift in Sources */,
 				724CD44122639F61007CD290 /* Endpoint.swift in Sources */,
+				7267D730226FB03B0029067C /* List.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88TYD9CU33;
-				INFOPLIST_FILE = trello/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/trello/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,7 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88TYD9CU33;
-				INFOPLIST_FILE = trello/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/trello/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

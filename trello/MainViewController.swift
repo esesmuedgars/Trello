@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  trello
 //
 //  Created by e.vanags on 13/04/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView!
 
@@ -72,13 +72,13 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return boards.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withType: BoardCell.self, for: indexPath) {
+        if let cell = tableView.dequeueReusableCell(withType: BoardTableViewCell.self, for: indexPath) {
             let title = boards[indexPath.row].name
             cell.configure(with: title)
 
@@ -89,12 +89,14 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO:
-        // Make request to get board data by board identifier
-        // Present `BoardViewController`
+        guard let viewController = storyboard?.instantiate(viewController: BoardViewController.self) else {
+            return
+        }
 
-        print(boards[indexPath.row].id)
+        viewController.identifier = boards[indexPath.row].id
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

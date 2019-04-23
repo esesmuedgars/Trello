@@ -89,7 +89,7 @@ public struct APIService {
             URLQueryItem(name: "token", value: token)
         ]
 
-        guard let url = Endpoint.boards(forMember: memberId).url(with: queryItems) else {
+        guard let url = Endpoint.boards(ofMember: memberId).url(with: queryItems) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -107,6 +107,52 @@ public struct APIService {
 
             do {
                 completion(.success(try JSONDecoder().decode(Boards.self, from: data)))
+            } catch {
+                completion(.failure(.unableToParseResponse))
+            }
+        }.resume()
+    }
+
+    /// One of: `all`, `closed`, `none`, `open`.
+    private let cards = "open"
+
+    /// `all` or a comma-separated list of card [fields](https://developers.trello.com/reference#card-object).
+    private let cardFields = "id,name,labels"
+
+    /// One of `all`, `closed`, `none`, `open`.
+    private let filter = "open"
+
+    /// `all` or a comma-separated list of list [fields](https://developers.trello.com/reference#list-object).
+    private var fields = "all"
+
+    public func fetchLists(ofBoard boardId: String, completionHandler completion: @escaping (Result<Lists, NetworkingError>) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "key", value: key),
+            URLQueryItem(name: "token", value: token),
+            URLQueryItem(name: "cards", value: cards),
+            URLQueryItem(name: "card_fields", value: cardFields),
+            URLQueryItem(name: "filter", value: filter),
+            URLQueryItem(name: "fields", value: fields)
+        ]
+
+        guard let url = Endpoint.lists(ofBoard: boardId).url(with: queryItems) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.responseNoData))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+
+            do {
+                completion(.success(try JSONDecoder().decode(Lists.self, from: data)))
             } catch {
                 completion(.failure(.unableToParseResponse))
             }

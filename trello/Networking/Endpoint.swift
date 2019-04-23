@@ -10,7 +10,9 @@ import Foundation
 
 public enum Endpoint {
     case authorize
-    case boards(forMember: String)
+    case boards(ofMember: String)
+    case lists(ofBoard: String)
+    case cards(ofBoard: String)
 
     private var rawValue: String {
         get {
@@ -19,6 +21,10 @@ public enum Endpoint {
                 return "authorize"
             case .boards(let memberId):
                 return "members/\(memberId)/boards"
+            case .lists(let boardId):
+                return "boards/\(boardId)/lists"
+            case .cards(let boardId):
+                return "boards/\(boardId)/cards"
             }
         }
     }
