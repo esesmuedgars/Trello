@@ -15,6 +15,6 @@ public class BoardTableViewCell: UITableViewCell {
 
     public func configure(with title: String) {
         titleLabel.text = title
-        iconView.image = UIImage(named: "right-chevron")
+        iconView.image = UIImage(named: "right-chevron")?.withRenderingMode(.alwaysTemplate)
     }
 }

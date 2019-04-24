@@ -8,9 +8,17 @@
 
 import UIKit
 
+@IBDesignable
 public class CardCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
+
+    @IBInspectable
+    private var cornerRadius: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
+    }
 
     public func configure(with title: String) {
         titleLabel.text = title

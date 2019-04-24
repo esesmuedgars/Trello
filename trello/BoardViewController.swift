@@ -25,6 +25,8 @@ final class BoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.largeTitleDisplayMode = .never
+
         APIService.shared.fetchLists(ofBoard: identifier) { [weak self] result in
             switch result {
             case .success(let lists):

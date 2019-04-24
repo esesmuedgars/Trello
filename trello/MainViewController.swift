@@ -11,9 +11,25 @@ import SafariServices
 
 class MainViewController: UIViewController {
 
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView! {
+        didSet {
+            let view = UIView()
+            view.frame.size.height = 20
+
+            // TODO: Add HeaderView and FooterView with separator subviews
+            //        let view = UIView()
+            //        view.backgroundColor = noContent ? .clear : .lightGray
+            //
+            //        return view
+
+            tableView.tableHeaderView = view
+            tableView.tableFooterView = view
+        }
+    }
 
     private weak var safariController: SFSafariViewController?
+
+    private var shouldAuthorize = true
 
     private var boards = Boards() {
         didSet {
@@ -21,25 +37,17 @@ class MainViewController: UIViewController {
         }
     }
 
+    private var noContent: Bool {
+        return boards.isEmpty
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Boards"
+
         bind()
     }
-
-    private func bind() {
-        APIService.shared.didAuthorize = { [weak self] in
-            self?.shouldAuthorize = false
-
-            DispatchQueue.main.async {
-                self?.safariController?.dismiss(animated: true, completion: {
-                    self?.safariController = nil
-                })
-            }
-        }
-    }
-
-    private var shouldAuthorize = true
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -64,9 +72,22 @@ class MainViewController: UIViewController {
 
             DispatchQueue.main.async {
                 let controller = SFSafariViewController(url: url)
+                controller.modalPresentationStyle = .currentContext
                 self?.safariController = controller
 
                 self?.present(controller, animated: true)
+            }
+        }
+    }
+
+    private func bind() {
+        APIService.shared.didAuthorize = { [weak self] in
+            self?.shouldAuthorize = false
+
+            DispatchQueue.main.async {
+                self?.safariController?.dismiss(animated: true, completion: {
+                    self?.safariController = nil
+                })
             }
         }
     }
@@ -74,29 +95,41 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return boards.count
+        return noContent ? 1 : boards.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withType: BoardTableViewCell.self, for: indexPath) {
-            let title = boards[indexPath.row].name
-            cell.configure(with: title)
+        if noContent {
+            return tableView.dequeueReusableCell(withType: NoContentTableViewCell.self, for: indexPath)!
+        } else {
+            let cell = tableView.dequeueReusableCell(withType: BoardTableViewCell.self, for: indexPath)!
+            cell.configure(with: boards[indexPath.row].name)
 
             return cell
         }
+    }
 
-        return UITableViewCell()
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+        let tableHeaderHeight = tableView.tableHeaderView?.frame.height ?? 0
+        let tableFooterHeight = tableView.tableFooterView?.frame.height ?? 0
+        let bottomInsetHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let newHeight = tableView.frame.height - statusBarHeight - navigationBarHeight - tableHeaderHeight - tableFooterHeight - bottomInsetHeight
+
+        return noContent ? newHeight : tableView.estimatedRowHeight
     }
 }
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewController = storyboard?.instantiate(viewController: BoardViewController.self) else {
-            return
+        guard !noContent else { return }
+
+        if let controller = storyboard?.instantiate(viewController: BoardViewController.self) {
+            controller.title = boards[indexPath.row].name
+            controller.identifier = boards[indexPath.row].id
+
+            navigationController?.pushViewController(controller, animated: true)
         }
-
-        viewController.identifier = boards[indexPath.row].id
-
-        navigationController?.pushViewController(viewController, animated: true)
     }
 }

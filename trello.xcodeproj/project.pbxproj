@@ -20,6 +20,7 @@
 		7267D734226FB1990029067C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D733226FB1990029067C /* Label.swift */; };
 		7267D736226FB5CD0029067C /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D735226FB5CD0029067C /* CardCollectionViewCell.swift */; };
 		7267D73A226FB9280029067C /* ListCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D739226FB9280029067C /* ListCollectionHeaderView.swift */; };
+		72707F8A2270FAF000DBA571 /* NoContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72707F892270FAF000DBA571 /* NoContentTableViewCell.swift */; };
 		728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F2226E5C760097F6A1 /* Extensions.swift */; };
 		728FA3F5226E5D870097F6A1 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */; };
 		72FB5786226E5646009BE51D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FB5785226E5646009BE51D /* Board.swift */; };
@@ -41,6 +42,7 @@
 		7267D733226FB1990029067C /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		7267D735226FB5CD0029067C /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		7267D739226FB9280029067C /* ListCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionHeaderView.swift; sourceTree = "<group>"; };
+		72707F892270FAF000DBA571 /* NoContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentTableViewCell.swift; sourceTree = "<group>"; };
 		728FA3F2226E5C760097F6A1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		72FB5785226E5646009BE51D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				7209869722626D5900327BF1 /* MainViewController.swift */,
+				72707F892270FAF000DBA571 /* NoContentTableViewCell.swift */,
 				728FA3F4226E5D870097F6A1 /* BoardTableViewCell.swift */,
 				7267D72D226F9F1C0029067C /* BoardViewController.swift */,
 				7267D739226FB9280029067C /* ListCollectionHeaderView.swift */,
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72707F8A2270FAF000DBA571 /* NoContentTableViewCell.swift in Sources */,
 				7209869822626D5900327BF1 /* MainViewController.swift in Sources */,
 				728FA3F3226E5C760097F6A1 /* Extensions.swift in Sources */,
 				724CD43F22639DFD007CD290 /* APIService.swift in Sources */,
