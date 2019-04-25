@@ -11,10 +11,13 @@ import UIKit
 public class BoardTableViewCell: UITableViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var iconView: UIImageView!
+    @IBOutlet private var iconView: UIImageView! {
+        didSet {
+            iconView.image = UIImage(named: "right-chevron")
+        }
+    }
 
     public func configure(with title: String) {
         titleLabel.text = title
-        iconView.image = UIImage(named: "right-chevron")?.withRenderingMode(.alwaysTemplate)
     }
 }

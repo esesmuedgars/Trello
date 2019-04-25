@@ -30,8 +30,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg4-fK-XXk">
-                                                    <rect key="frame" x="30" y="16" width="43.5" height="48"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <rect key="frame" x="30" y="16" width="43" height="48"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -48,7 +48,7 @@
                                             <constraints>
                                                 <constraint firstItem="FT8-YO-6E6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gg4-fK-XXk" secondAttribute="trailing" constant="10" id="CvZ-VL-Q3h"/>
                                                 <constraint firstItem="gg4-fK-XXk" firstAttribute="top" secondItem="WND-Ju-pxC" secondAttribute="topMargin" constant="5" id="agP-5G-Gnu"/>
-                                                <constraint firstItem="gg4-fK-XXk" firstAttribute="leading" secondItem="WND-Ju-pxC" secondAttribute="leadingMargin" constant="15" id="nec-1e-coN"/>
+                                                <constraint firstItem="gg4-fK-XXk" firstAttribute="leading" secondItem="WND-Ju-pxC" secondAttribute="leadingMargin" constant="15" id="nvC-Tp-Wab"/>
                                                 <constraint firstAttribute="trailing" secondItem="FT8-YO-6E6" secondAttribute="trailing" constant="15" id="rwV-Og-BTM"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gg4-fK-XXk" secondAttribute="bottom" constant="5" id="vir-YY-GUP"/>
                                                 <constraint firstItem="FT8-YO-6E6" firstAttribute="centerY" secondItem="WND-Ju-pxC" secondAttribute="centerY" id="zTw-9b-Z7O"/>

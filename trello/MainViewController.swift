@@ -13,17 +13,8 @@ class MainViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView! {
         didSet {
-            let view = UIView()
-            view.frame.size.height = 20
-
-            // TODO: Add HeaderView and FooterView with separator subviews
-            //        let view = UIView()
-            //        view.backgroundColor = noContent ? .clear : .lightGray
-            //
-            //        return view
-
-            tableView.tableHeaderView = view
-            tableView.tableFooterView = view
+            tableView.tableHeaderView = TableHeaderView()
+            tableView.tableFooterView = TableFooterView()
         }
     }
 
@@ -39,6 +30,10 @@ class MainViewController: UIViewController {
 
     private var noContent: Bool {
         return boards.isEmpty
+    }
+
+    private var hasContent: Bool {
+        return !boards.isEmpty
     }
 
     override func viewDidLoad() {
@@ -95,7 +90,27 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return noContent ? 1 : boards.count
+        if noContent {
+            if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
+                tableHeaderView.separator.backgroundColor = .clear
+            }
+
+            if let tableFooterView = tableView.tableFooterView as? TableFooterView {
+                tableFooterView.separator.backgroundColor = .clear
+            }
+
+            return 1
+        } else {
+            if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
+                tableHeaderView.separator.backgroundColor = .lightGray
+            }
+
+            if let tableFooterView = tableView.tableFooterView as? TableFooterView {
+                tableFooterView.separator.backgroundColor = .lightGray
+            }
+
+            return boards.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,7 +138,7 @@ extension MainViewController: UITableViewDataSource {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard !noContent else { return }
+        guard hasContent else { return }
 
         if let controller = storyboard?.instantiate(viewController: BoardViewController.self) {
             controller.title = boards[indexPath.row].name

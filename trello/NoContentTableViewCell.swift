@@ -12,7 +12,7 @@ public class NoContentTableViewCell: UITableViewCell {
 
     @IBOutlet private var iconView: UIImageView! {
         didSet {
-            iconView.image = UIImage(named: "no-content")?.withRenderingMode(.alwaysTemplate)
+            iconView.image = UIImage(named: "no-content")
         }
     }
 }
