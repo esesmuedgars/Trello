@@ -123,7 +123,7 @@ public struct APIService {
     private let filter = "open"
 
     /// `all` or a comma-separated list of list [fields](https://developers.trello.com/reference#list-object).
-    private var fields = "all"
+    private var fields = "id,name"
 
     public func fetchLists(ofBoard boardId: String, completionHandler completion: @escaping (Result<Lists, NetworkingError>) -> Void) {
         let queryItems = [

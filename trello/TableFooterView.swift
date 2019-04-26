@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TableFooterView: UIView {
+final public class TableFooterView: UIView {
 
     public lazy var separator = UIView()
 

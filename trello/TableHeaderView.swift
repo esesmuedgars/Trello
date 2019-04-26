@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TableHeaderView: UIView {
+final public class TableHeaderView: UIView {
 
     public lazy var separator = UIView()
 

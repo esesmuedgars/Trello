@@ -17,5 +17,4 @@ public struct List: Codable {
     var name: String
 
     var cards: Cards
-
 }

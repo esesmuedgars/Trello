@@ -21,5 +21,9 @@ public struct Label: Codable {
     /// The color of the label. One of:
     /// yellow, purple, blue, red, green, orange, black, sky, pink, lime, null
     /// (null means no color, and the label will not show on the front of cards)
-    var color: String
+    private var color: String?
+
+    var colorName: String {
+        return color ?? "none"
+    }
 }

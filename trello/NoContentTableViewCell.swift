@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class NoContentTableViewCell: UITableViewCell {
+final public class NoContentTableViewCell: UITableViewCell {
 
     @IBOutlet private var iconView: UIImageView! {
         didSet {

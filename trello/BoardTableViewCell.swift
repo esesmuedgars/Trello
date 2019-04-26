@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class BoardTableViewCell: UITableViewCell {
+final public class BoardTableViewCell: UITableViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var iconView: UIImageView! {
@@ -17,7 +17,7 @@ public class BoardTableViewCell: UITableViewCell {
         }
     }
 
-    public func configure(with title: String) {
-        titleLabel.text = title
+    public func configure(with board: Board) {
+        titleLabel.text = board.name
     }
 }

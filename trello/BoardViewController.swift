@@ -8,21 +8,26 @@
 
 import UIKit
 
-final class BoardViewController: UIViewController {
+final public class BoardViewController: UIViewController {
 
     @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var noContentView: UIView!
+    @IBOutlet private var noContentImageView: UIImageView! {
+        didSet {
+            noContentImageView.image = UIImage(named: "no-content")
+        }
+    }
 
     public var identifier: String!
 
     private var lists = Lists() {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            noContentView.isHidden = !lists.isEmpty
+            collectionView.reloadData()
         }
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.largeTitleDisplayMode = .never
@@ -30,7 +35,9 @@ final class BoardViewController: UIViewController {
         APIService.shared.fetchLists(ofBoard: identifier) { [weak self] result in
             switch result {
             case .success(let lists):
-                self?.lists = lists
+                DispatchQueue.main.async {
+                    self?.lists = lists
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -39,18 +46,17 @@ final class BoardViewController: UIViewController {
 }
 
 extension BoardViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return lists.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return lists[section].cards.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withType: ListCollectionHeaderView.self, for: indexPath) {
-            let title = lists[indexPath.section].name
-            view.configure(with: title)
+            view.configure(with: lists[indexPath.section])
 
             return view
         }
@@ -58,10 +64,9 @@ extension BoardViewController: UICollectionViewDataSource {
         return UICollectionReusableView()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withType: CardCollectionViewCell.self, for: indexPath) {
-            let title = lists[indexPath.section].cards[indexPath.row].name
-            cell.configure(with: title)
+            cell.configure(with: lists[indexPath.section].cards[indexPath.row])
 
             return cell
         }
@@ -70,6 +75,21 @@ extension BoardViewController: UICollectionViewDataSource {
     }
 }
 
-extension BoardViewController: UICollectionViewDelegate {
+extension BoardViewController: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 40, height: 65)
+    }
+}
 
+extension BoardViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let controller = storyboard?.instantiate(viewController: CardViewController.self) {
+            let card = lists[indexPath.section].cards[indexPath.row]
+
+            controller.title = card.name
+            controller.identifier = card.id
+
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
 }

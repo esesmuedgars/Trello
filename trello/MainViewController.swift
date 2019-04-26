@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class MainViewController: UIViewController {
+final public class MainViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView! {
         didSet {
@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
         return searchController.isActive && !noSearchInput
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Boards"
@@ -67,7 +67,7 @@ class MainViewController: UIViewController {
         bind()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         guard shouldAuthorize else {
@@ -112,7 +112,7 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+    public func updateSearchResults(for searchController: UISearchController) {
         if let input = searchController.searchBar.text {
             filteredBoards = boards.filter { board in
                 board.name.lowercased().contains(input.lowercased())
@@ -122,7 +122,7 @@ extension MainViewController: UISearchResultsUpdating {
 }
 
 extension MainViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if noContent {
             if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
                 tableHeaderView.separator.backgroundColor = .clear
@@ -146,19 +146,20 @@ extension MainViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if noContent {
             return tableView.dequeueReusableCell(withType: NoContentTableViewCell.self, for: indexPath)!
         } else {
             let cell = tableView.dequeueReusableCell(withType: BoardTableViewCell.self, for: indexPath)!
-            let board = isFiltering ? filteredBoards[indexPath.row] : boards[indexPath.row]
-            cell.configure(with: board.name)
+            cell.configure(with: isFiltering ? filteredBoards[indexPath.row] : boards[indexPath.row])
 
             return cell
         }
     }
+}
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+extension MainViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
         let tableHeaderHeight = tableView.tableHeaderView?.frame.height ?? 0
@@ -168,10 +169,8 @@ extension MainViewController: UITableViewDataSource {
 
         return noContent ? newHeight : tableView.estimatedRowHeight
     }
-}
 
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard hasContent else { return }
 
         if let controller = storyboard?.instantiate(viewController: BoardViewController.self) {

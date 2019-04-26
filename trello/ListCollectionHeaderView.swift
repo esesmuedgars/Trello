@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class ListCollectionHeaderView: UICollectionReusableView {
+final public class ListCollectionHeaderView: UICollectionReusableView {
 
     @IBOutlet private var titleLabel: UILabel!
 
-    public func configure(with title: String) {
-        titleLabel.text = title
+    public func configure(with list: List) {
+        titleLabel.text = list.name
     }
 }
