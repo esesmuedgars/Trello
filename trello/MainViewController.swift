@@ -18,9 +18,24 @@ class MainViewController: UIViewController {
         }
     }
 
+    private lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: nil)
+        controller.searchResultsUpdater = self
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.searchBar.placeholder = "Boards"
+
+        return controller
+    }()
+
     private weak var safariController: SFSafariViewController?
 
     private var shouldAuthorize = true
+
+    private var filteredBoards = Boards() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     private var boards = Boards() {
         didSet {
@@ -36,10 +51,18 @@ class MainViewController: UIViewController {
         return !boards.isEmpty
     }
 
+    private var isFiltering: Bool {
+        let noSearchInput = searchController.searchBar.text?.isEmpty ?? true
+        return searchController.isActive && !noSearchInput
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Boards"
+
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
 
         bind()
     }
@@ -67,7 +90,7 @@ class MainViewController: UIViewController {
 
             DispatchQueue.main.async {
                 let controller = SFSafariViewController(url: url)
-                controller.modalPresentationStyle = .currentContext
+                controller.modalPresentationStyle = .fullScreen
                 self?.safariController = controller
 
                 self?.present(controller, animated: true)
@@ -83,6 +106,16 @@ class MainViewController: UIViewController {
                 self?.safariController?.dismiss(animated: true, completion: {
                     self?.safariController = nil
                 })
+            }
+        }
+    }
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let input = searchController.searchBar.text {
+            filteredBoards = boards.filter { board in
+                board.name.lowercased().contains(input.lowercased())
             }
         }
     }
@@ -109,7 +142,7 @@ extension MainViewController: UITableViewDataSource {
                 tableFooterView.separator.backgroundColor = .lightGray
             }
 
-            return boards.count
+            return isFiltering ? filteredBoards.count : boards.count
         }
     }
 
@@ -118,7 +151,8 @@ extension MainViewController: UITableViewDataSource {
             return tableView.dequeueReusableCell(withType: NoContentTableViewCell.self, for: indexPath)!
         } else {
             let cell = tableView.dequeueReusableCell(withType: BoardTableViewCell.self, for: indexPath)!
-            cell.configure(with: boards[indexPath.row].name)
+            let board = isFiltering ? filteredBoards[indexPath.row] : boards[indexPath.row]
+            cell.configure(with: board.name)
 
             return cell
         }
@@ -141,8 +175,10 @@ extension MainViewController: UITableViewDelegate {
         guard hasContent else { return }
 
         if let controller = storyboard?.instantiate(viewController: BoardViewController.self) {
-            controller.title = boards[indexPath.row].name
-            controller.identifier = boards[indexPath.row].id
+            let board = isFiltering ? filteredBoards[indexPath.row] : boards[indexPath.row]
+
+            controller.title = board.name
+            controller.identifier = board.id
 
             navigationController?.pushViewController(controller, animated: true)
         }
