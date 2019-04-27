@@ -90,6 +90,7 @@ final public class MainViewController: UIViewController {
 
             DispatchQueue.main.async {
                 let controller = SFSafariViewController(url: url)
+                // TODO: Fix modal transition not recalling authorize if SF was dismissed
                 controller.modalPresentationStyle = .fullScreen
                 self?.safariController = controller
 
@@ -109,6 +110,16 @@ final public class MainViewController: UIViewController {
             }
         }
     }
+
+    private func setSeparator(color: UIColor) {
+        if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
+            tableHeaderView.separator.backgroundColor = color
+        }
+
+        if let tableFooterView = tableView.tableFooterView as? TableFooterView {
+            tableFooterView.separator.backgroundColor = color
+        }
+    }
 }
 
 extension MainViewController: UISearchResultsUpdating {
@@ -124,25 +135,19 @@ extension MainViewController: UISearchResultsUpdating {
 extension MainViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if noContent {
-            if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
-                tableHeaderView.separator.backgroundColor = .clear
-            }
-
-            if let tableFooterView = tableView.tableFooterView as? TableFooterView {
-                tableFooterView.separator.backgroundColor = .clear
-            }
+            setSeparator(color: .clear)
 
             return 1
         } else {
-            if let tableHeaderView = tableView.tableHeaderView as? TableHeaderView {
-                tableHeaderView.separator.backgroundColor = .lightGray
-            }
+            if isFiltering {
+                setSeparator(color: filteredBoards.isEmpty ? .clear : .lightGray)
 
-            if let tableFooterView = tableView.tableFooterView as? TableFooterView {
-                tableFooterView.separator.backgroundColor = .lightGray
-            }
+                return filteredBoards.count
+            } else {
+                setSeparator(color: .lightGray)
 
-            return isFiltering ? filteredBoards.count : boards.count
+                return boards.count
+            }
         }
     }
 

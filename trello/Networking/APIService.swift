@@ -78,7 +78,7 @@ public struct APIService {
             URLQueryItem(name: "response_type", value: responseType)
         ]
 
-        let url = Endpoint.authorize.url(with: queryItems)
+        let url = Endpoint.authorize.url(queryItems: queryItems)
 
         completion(url)
     }
@@ -89,7 +89,7 @@ public struct APIService {
             URLQueryItem(name: "token", value: token)
         ]
 
-        guard let url = Endpoint.boards(ofMember: memberId).url(with: queryItems) else {
+        guard let url = Endpoint.boards(ofMember: memberId).url(queryItems: queryItems) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -117,7 +117,7 @@ public struct APIService {
     private let cards = "open"
 
     /// `all` or a comma-separated list of card [fields](https://developers.trello.com/reference#card-object).
-    private let cardFields = "id,name,labels"
+    private let cardFields = "id,name,desc,labels"
 
     /// One of `all`, `closed`, `none`, `open`.
     private let filter = "open"
@@ -135,7 +135,7 @@ public struct APIService {
             URLQueryItem(name: "fields", value: fields)
         ]
 
-        guard let url = Endpoint.lists(ofBoard: boardId).url(with: queryItems) else {
+        guard let url = Endpoint.lists(ofBoard: boardId).url(queryItems: queryItems) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -156,6 +156,96 @@ public struct APIService {
             } catch {
                 completion(.failure(.unableToParseResponse))
             }
+        }.resume()
+    }
+
+    /// `true`, `false`, or `cover`
+    private let attachments = "false"
+
+    /// Whether to return the checklists on the card. `all` or `none`
+    private let checklists = "none"
+
+    public func fetchCard(withId cardId: String, completionHandler completion: @escaping (Result<Card, NetworkingError>) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "key", value: key),
+            URLQueryItem(name: "token", value: token),
+            URLQueryItem(name: "id", value: cardId),
+            URLQueryItem(name: "fields", value: cardFields),
+        ]
+
+        guard let url = Endpoint.card(withId: cardId).url(queryItems: queryItems) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.responseNoData))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+
+            do {
+                completion(.success(try JSONDecoder().decode(Card.self, from: data)))
+            } catch {
+                completion(.failure(.unableToParseResponse))
+            }
+        }.resume()
+    }
+
+    public func updateCard(withId cardId: String, description: String?, completionHandler completion: @escaping (Result<Void, NetworkingError>) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "key", value: key),
+            URLQueryItem(name: "token", value: token),
+            URLQueryItem(name: "id", value: cardId),
+            URLQueryItem(name: "value", value: description)
+        ]
+
+        var request = Endpoint.card(withId: cardId).request(with: ["desc"], queryItems: queryItems)
+        request.httpMethod = "PUT"
+
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard data != nil, error == nil else {
+                completion(.failure(.responseNoData))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+
+            completion(.success(()))
+            }.resume()
+    }
+
+
+    public func deleteCard(withId cardId: String, completionHandler completion: @escaping (Result<Void, NetworkingError>) -> Void) {
+        let queryItems = [
+            URLQueryItem(name: "key", value: key),
+            URLQueryItem(name: "token", value: token),
+            URLQueryItem(name: "id", value: cardId)
+        ]
+
+        var request = Endpoint.card(withId: cardId).request(queryItems: queryItems)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard data != nil, error == nil else {
+                completion(.failure(.responseNoData))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, 200 ..< 300 ~= response.statusCode else {
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+
+            completion(.success(()))
         }.resume()
     }
 }

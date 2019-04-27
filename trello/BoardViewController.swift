@@ -10,7 +10,11 @@ import UIKit
 
 final public class BoardViewController: UIViewController {
 
-    @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var collectionView: UICollectionView! {
+        didSet {
+            collectionView.contentInset.top = 20
+        }
+    }
     @IBOutlet private var noContentView: UIView!
     @IBOutlet private var noContentImageView: UIImageView! {
         didSet {
@@ -31,6 +35,10 @@ final public class BoardViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.largeTitleDisplayMode = .never
+
+        let barButton = UIBarButtonItem()
+        barButton.title = "Back"
+        navigationItem.backBarButtonItem = barButton
 
         APIService.shared.fetchLists(ofBoard: identifier) { [weak self] result in
             switch result {
@@ -84,10 +92,7 @@ extension BoardViewController: UICollectionViewDelegateFlowLayout {
 extension BoardViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let controller = storyboard?.instantiate(viewController: CardViewController.self) {
-            let card = lists[indexPath.section].cards[indexPath.row]
-
-            controller.title = card.name
-            controller.identifier = card.id
+            controller.identifier = lists[indexPath.section].cards[indexPath.row].id
 
             navigationController?.pushViewController(controller, animated: true)
         }

@@ -1,5 +1,5 @@
 //
-//  LabelView.swift
+//  LabelCircleView.swift
 //  trello
 //
 //  Created by e.vanags on 26/04/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final public class LabelView: UIView {
+final public class LabelCircleView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)

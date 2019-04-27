@@ -65,3 +65,12 @@ extension UIColor {
         }
     }
 }
+
+extension Optional where Wrapped == String {
+    var isEmpryOrNil: Bool {
+        get {
+            guard let self = self else { return true }
+            return self.isEmpty
+        }
+    }
+}

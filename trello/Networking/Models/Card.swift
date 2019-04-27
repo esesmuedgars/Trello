@@ -12,12 +12,24 @@ public typealias Cards = [Card]
 
 public struct Card: Codable {
 
-    /// The ID of the card
+    public static var `default` = Card()
+
+    /// The ID of the card.
     var id: String
 
-    /// Name of the card
+    /// Name of the card.
     var name: String
 
-    /// Array of label objects on this card
+    /// The description for the card. Up to 16384 chars.
+    var desc: String?
+
+    /// Array of label objects on this card.
     var labels: Labels
+
+    private init() {
+        self.id = ""
+        self.name = ""
+        self.desc = nil
+        self.labels = []
+    }
 }

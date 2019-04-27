@@ -27,7 +27,7 @@ final public class CardCollectionViewCell: UICollectionViewCell {
         removeArrangedSubviews()
 
         card.labels.forEach { [weak self] label in
-            let view = LabelView()
+            let view = LabelCircleView()
             view.backgroundColor = .color(label.colorName)
 
             self?.labelStackView.addArrangedSubview(view)

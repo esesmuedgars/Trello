@@ -12,7 +12,7 @@ public enum Endpoint {
     case authorize
     case boards(ofMember: String)
     case lists(ofBoard: String)
-    case cards(ofBoard: String)
+    case card(withId: String)
 
     private var rawValue: String {
         get {
@@ -23,17 +23,21 @@ public enum Endpoint {
                 return "members/\(memberId)/boards"
             case .lists(let boardId):
                 return "boards/\(boardId)/lists"
-            case .cards(let boardId):
-                return "boards/\(boardId)/cards"
+            case .card(let cardId):
+                return "cards/\(cardId)"
             }
         }
     }
 
     private static var base = "https://trello.com/1"
 
-    public func url(with queryItems: [URLQueryItem]? = nil) -> URL? {
+    public func url(with pathComponents: [String] = [], queryItems: [URLQueryItem]? = nil) -> URL? {
         var url = URL(string: Endpoint.base)!
         url.appendPathComponent(rawValue)
+
+        for component in pathComponents {
+            url.appendPathComponent(component)
+        }
 
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = queryItems
@@ -41,7 +45,7 @@ public enum Endpoint {
         return components?.url
     }
 
-    public func request(with queryItems: [URLQueryItem]? = nil) -> URLRequest {
-        return URLRequest(url: url(with: queryItems)!)
+    public func request(with pathComponents: [String] = [], queryItems: [URLQueryItem]? = nil) -> URLRequest {
+        return URLRequest(url: url(with: pathComponents, queryItems: queryItems)!)
     }
 }

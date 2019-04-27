@@ -12,9 +12,12 @@ public typealias Lists = [List]
 
 public struct List: Codable {
 
+    /// The ID of the list.
     var id: String
 
+    /// The name of the list.
     var name: String
 
+    /// Array of card objects in this list.
     var cards: Cards
 }
