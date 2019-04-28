@@ -1,11 +1,9 @@
 # Trello
 
 ### Recources:
+- [Prototype](https://invis.io/GQRR3B65P2E);
+- [Designs](https://zpl.io/VYr1Lom);
 - [Trello API](https://developers.trello.com/docs/api-introduction);
-  - [Authorization reference](https://developers.trello.com/page/authorization);
-  - [Boards reference](https://developers.trello.com/reference#boards-2);
-  - [Lists reference](https://developers.trello.com/reference#lists);
-  - [Cards reference](https://developers.trello.com/reference#cards-1);
 - [Assets]();
 
 ### Workflow:
