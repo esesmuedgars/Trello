@@ -431,7 +431,7 @@
                                 <constraints>
                                     <constraint firstItem="zTS-bC-gTs" firstAttribute="top" secondItem="OiM-K1-MTA" secondAttribute="top" constant="15" id="0yQ-e5-2yg"/>
                                     <constraint firstItem="zTS-bC-gTs" firstAttribute="leading" secondItem="OiM-K1-MTA" secondAttribute="leading" constant="15" id="2bk-9j-3hO"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zTS-bC-gTs" secondAttribute="trailing" constant="10" id="62X-zh-OOl"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zTS-bC-gTs" secondAttribute="trailing" constant="15" id="62X-zh-OOl"/>
                                     <constraint firstItem="Iko-sv-fv8" firstAttribute="top" secondItem="K1P-82-7mR" secondAttribute="top" constant="8" id="7sh-FE-8N8"/>
                                     <constraint firstAttribute="bottom" secondItem="K1P-82-7mR" secondAttribute="bottom" constant="5" id="K5H-24-xXm"/>
                                     <constraint firstItem="Iko-sv-fv8" firstAttribute="leading" secondItem="K1P-82-7mR" secondAttribute="leading" constant="5" id="Xxz-9d-6gi"/>
