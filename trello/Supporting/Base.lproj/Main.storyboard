@@ -403,7 +403,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiM-K1-MTA">
-                                <rect key="frame" x="30" y="141.5" width="315" height="200"/>
+                                <rect key="frame" x="25" y="141.5" width="325" height="495.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-bC-gTs">
                                         <rect key="frame" x="15" y="15" width="87" height="20.5"/>
@@ -411,8 +411,8 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1P-82-7mR">
-                                        <rect key="frame" x="5" y="45.5" width="305" height="149.5"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1P-82-7mR">
+                                        <rect key="frame" x="5" y="45.5" width="315" height="445"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="yes" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -421,7 +421,7 @@
                                         </connections>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aa" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iko-sv-fv8">
-                                        <rect key="frame" x="10" y="53.5" width="295" height="18"/>
+                                        <rect key="frame" x="10" y="53.5" width="305" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="placeholderTextColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
@@ -433,7 +433,6 @@
                                     <constraint firstItem="zTS-bC-gTs" firstAttribute="leading" secondItem="OiM-K1-MTA" secondAttribute="leading" constant="15" id="2bk-9j-3hO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zTS-bC-gTs" secondAttribute="trailing" constant="10" id="62X-zh-OOl"/>
                                     <constraint firstItem="Iko-sv-fv8" firstAttribute="top" secondItem="K1P-82-7mR" secondAttribute="top" constant="8" id="7sh-FE-8N8"/>
-                                    <constraint firstAttribute="height" constant="200" id="EVU-1R-k3e"/>
                                     <constraint firstAttribute="bottom" secondItem="K1P-82-7mR" secondAttribute="bottom" constant="5" id="K5H-24-xXm"/>
                                     <constraint firstItem="Iko-sv-fv8" firstAttribute="leading" secondItem="K1P-82-7mR" secondAttribute="leading" constant="5" id="Xxz-9d-6gi"/>
                                     <constraint firstItem="K1P-82-7mR" firstAttribute="leading" secondItem="OiM-K1-MTA" secondAttribute="leading" constant="5" id="adt-6t-hPH"/>
@@ -445,18 +444,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="u1l-QX-724" firstAttribute="bottom" secondItem="OiM-K1-MTA" secondAttribute="bottom" constant="30" id="4Bi-tr-W1Z"/>
                             <constraint firstItem="1gY-4V-3ec" firstAttribute="leading" secondItem="u1l-QX-724" secondAttribute="leading" id="7Cq-8g-HlO"/>
-                            <constraint firstItem="u1l-QX-724" firstAttribute="trailing" secondItem="OiM-K1-MTA" secondAttribute="trailing" constant="30" id="WaA-vi-LJI"/>
+                            <constraint firstItem="u1l-QX-724" firstAttribute="trailing" secondItem="OiM-K1-MTA" secondAttribute="trailing" constant="25" id="WaA-vi-LJI"/>
                             <constraint firstItem="OiM-K1-MTA" firstAttribute="top" secondItem="1gY-4V-3ec" secondAttribute="bottom" constant="20" id="aol-1G-eoD"/>
                             <constraint firstItem="1gY-4V-3ec" firstAttribute="top" secondItem="u1l-QX-724" secondAttribute="top" id="bRI-7T-M1i"/>
                             <constraint firstItem="u1l-QX-724" firstAttribute="trailing" secondItem="1gY-4V-3ec" secondAttribute="trailing" id="jiG-bE-XUj"/>
-                            <constraint firstItem="OiM-K1-MTA" firstAttribute="leading" secondItem="u1l-QX-724" secondAttribute="leading" constant="30" id="vch-t9-Ing"/>
+                            <constraint firstItem="OiM-K1-MTA" firstAttribute="leading" secondItem="u1l-QX-724" secondAttribute="leading" constant="25" id="vch-t9-Ing"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u1l-QX-724"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="3tG-zU-Rgf" id="wrc-w9-J6i"/>
                         <outlet property="collectionViewLayout" destination="vbc-hn-hKm" id="SPh-6P-cYt"/>
+                        <outlet property="containerBottomConstraint" destination="4Bi-tr-W1Z" id="k81-MO-X3Z"/>
                         <outlet property="labelContainerView" destination="Ph9-vA-ZKW" id="cja-7P-0ud"/>
                         <outlet property="placeholderLabel" destination="Iko-sv-fv8" id="Aky-pk-aPv"/>
                         <outlet property="textView" destination="K1P-82-7mR" id="dfV-aq-lEM"/>

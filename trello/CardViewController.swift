@@ -36,6 +36,9 @@ final public class CardViewController: UIViewController {
     }
     @IBOutlet private var textView: UITextView!
     @IBOutlet private var placeholderLabel: UILabel!
+    @IBOutlet private var containerBottomConstraint: NSLayoutConstraint!
+
+    private var tapGestureRecognizer: UITapGestureRecognizer!
 
     @IBAction func didTouchUpInsideSave() {
         APIService.shared.updateCard(withId: identifier, description: textView.text) { [weak self] result in
@@ -82,6 +85,36 @@ final public class CardViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc
+    private func handleKeyboard(_ notification: Notification) {
+        if let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+
+            switch notification.name {
+            case UIResponder.keyboardWillShowNotification:
+                containerBottomConstraint.constant += value.cgRectValue.height
+            case UIResponder.keyboardWillHideNotification:
+                containerBottomConstraint.constant = 30
+            default:
+                return
+            }
+
+            UIView.animate(withDuration: 0) { [weak self] in
+                self?.view.layoutIfNeeded()
+            }
+        }
+    }
+
+    @objc
+    private func handleTapGesture() {
+        textView.resignFirstResponder()
     }
 
     @objc
@@ -104,6 +137,11 @@ final public class CardViewController: UIViewController {
         })
 
         present(alert, animated: true)
+    }
+
+    deinit {
+        view.removeGestureRecognizer(tapGestureRecognizer)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
